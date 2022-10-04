@@ -5,7 +5,19 @@
 * GASA is graph neural network framework that makes self-feature deduction by applying an attention mechanism to automatically capture the most important structural features related to synthetic accessibility during the training process.<br/>
 * GASA is able to identify structurally similar compounds effectively.<br/>
 ## Installation
-### Known Installation Issues
+#### 摸索出来的安装方法
+首先git clone一下：
+```
+
+```
+激活一下环境，然后在bash中运行如下代码：
+```
+conda install -y -c dglteam dgl
+conda install -y pytorch torchvision torchaudio cpuonly -c pytorch
+pip install dgllife
+conda install -y psutil
+conda install -y scikit-learn=0.21.3
+```
 #### The following versions must be used in order to use the pretrained models:
 * python 3.6+ <br/>
 * DGL 0.7.0+ [https://www.dgl.ai/pages/start.html]<br/>
