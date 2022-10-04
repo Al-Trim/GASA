@@ -1,5 +1,0 @@
-# gasa.py
-32 args=[]
-
-# model/data.py
-1 import errno
