@@ -29,7 +29,7 @@ def parse():
                         help='Metric for evaluation (default: roc_auc_score)')
     parser.add_argument('-p', '--result-path', type=str, default='gasa/results',
                         help='Path to save training results (default: classification_results)')
-    args = parser.parse_args().__dict__
+    args = parser.parse_args(args=[]).__dict__
 
     if args['num_evals'] is not None:
         assert args['num_evals'] > 0, 'Expect the number of hyperparameter search trials to ' \
@@ -165,7 +165,10 @@ def GASA(smiles):
         ls_smi = smiles
     else:
         ls_smi.append(smiles)
-    graph = generate_graph(ls_smi)
+    try:
+        graph = generate_graph(ls_smi)
+    except Exception:
+        return 0,0,1
     data = pred_data(graph=graph, smiles=ls_smi)             
     data_loader = DataLoader(data, batch_size=exp_config['batch_size'], shuffle=False, collate_fn=predict_collate)
     model = load_model(exp_config)
