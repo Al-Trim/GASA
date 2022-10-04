@@ -8,7 +8,7 @@
 #### 摸索出来的安装方法
 首先git clone一下：
 ```
-
+git clone https://github.com/Al-Trim/GASA.git
 ```
 激活一下环境，然后在bash中运行如下代码：
 ```
