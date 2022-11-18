@@ -145,7 +145,7 @@ def load_model(exp_configure):
     return model
 
 
-def GASA(smiles, trial_path_prefix="./"):
+def GASA(smiles):
     '''
     GASA model for prediction
     Parameters
@@ -160,10 +160,6 @@ def GASA(smiles, trial_path_prefix="./"):
     np.random.seed(0)
     exp_config = get_configure(args['model'])
     exp_config.update({'model': args['model']}) 
-    # ------ J.Liu 2022-11-17 : to avoid possible dir conflicts if running in parallel
-    if args['result_path'] == "gasa/results" :
-       args['result_path'] = trial_path_prefix + "/results"
-    # -------
     args = init_trial_path(args)
     ls_smi = []
     if isinstance(smiles, list):  
@@ -175,10 +171,7 @@ def GASA(smiles, trial_path_prefix="./"):
     data_loader = DataLoader(data, batch_size=exp_config['batch_size'], shuffle=False, collate_fn=predict_collate)
     model = load_model(exp_config)
     loss_func = nn.CrossEntropyLoss()
-    # ---- J.Liu 2022-11-17 : let gasa can be invokded without linking gasa source to local
-  # path = os.getcwd()
-    path = os.path.dirname(__file__)
-    # ------
+    path = os.getcwd()
     pth = os.path.join(path, "model/gasa.pth")
     checkpoint = torch.load(pth, map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['model_state_dict'])

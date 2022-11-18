@@ -46,12 +46,8 @@ def init_trial_path(args):
 
 
 def get_configure(model):
-    # ---- J.Liu 2022-11-17 : let gasa can be invokded without linking gasa source to local
-  # path = os.getcwd()
-  # p = os.path.join(path, "model/gasa.json")
-    path = os.path.dirname(__file__)
-    p = os.path.join(path, "gasa.json")
-    # -------
+    path = os.getcwd()
+    p = os.path.join(path, "model/gasa.json")
     with open(p, 'r') as f:
         config = json.load(f)
     return config
